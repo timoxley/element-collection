@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <title>Show/Hide Elements</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-responsive.no-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../build/build.css" />
+    <style>
+      body {
+        background: lightgrey;
+      }
+      .nav {
+        background: white;
+      }
+      .page {
+        background: white;
+        outline: 1px solid red;
+        padding-top: 80px;
+        height: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="tab-menu" class="nav nav-tabs navbar-fixed-top">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="container">
+      <a name="home"></a>
+      <div class="page" id="home-page">
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      </div>
+
+      <a name="about"></a>
+      <div class="page" id="about-page">
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+      </div>
+
+      <a name="contact"></a>
+      <div class="page" id="contact-page">
+        <form action="#" method="post">
+          <div>
+               <label for="name">Text Input:</label>
+               <input type="text" name="name" id="name" value="" tabindex="1" />
+          </div>
+          <div>
+              <input type="submit" value="Submit" />
+            </div>
+        </form>
+
+      </div>
+    </div>
+    <script src="../../build/build.js"></script>
+    <script>
+      var List = require('element-list')
+      var matchesSelector = require('component-matches-selector')
+
+      var Tabs = function(tabs) {
+        this.list = new List(tabs)
+        this.select(this.list.first())
+      }
+
+      Tabs.prototype.select = function(id) {
+        // find item that matches id
+        this.selected = this.list.find(function(el) {
+          return this.elementMatches(el, id)
+        }.bind(this))
+
+        // hide all elements
+        if (this.selected) this.list.each(function(el) {
+          el.style.display = 'none'
+        })
+
+        // show selected element
+        this.selected.style.display = 'block'
+
+        return this
+      }
+
+      Tabs.prototype.elementMatches = function(el, selector) {
+        if (typeof selector === 'string') return matchesSelector(el, selector)
+        return selector === el
+      }
+
+      var tabs = new Tabs(document.querySelectorAll('.page')) // could have passed a string as well
+      var nav = List('.nav a') // < for example.
+
+      // attach click listeners to nav's links
+      nav.each(function(link) {
+        link.addEventListener('click', function(e) {
+          tabs.select(e.target.hash + '-page')
+        })
+      })
+
+    </script>
+  </body>
+</html>
