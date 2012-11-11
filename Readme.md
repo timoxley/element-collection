@@ -1,7 +1,6 @@
-
 # element-collection
 
-  Enumerable Collection of DOM Elements
+  Enumerable DOM Element Collection providing methods like find, select, reject, first, etc.
 
 ## Installation
 
@@ -23,16 +22,25 @@ var selectedItem = nav.find(function(el) {
 // attach click listeners to nav's links
 nav.each(function(link) {
   link.addEventListener('click', function(e) {
-    tabs.select(e.target.hash + '-page')
+    tabs.select(e.target.hash)
   })
 })
+
+// Hide all .hidden elements
+var hidden = ElementCollection('.hidden')
+hidden.each(hide)
+
+function hide(el) {
+  el.style.display = 'none'
+}
+
 ```
 
 ## API
 
   ElementCollection(selector Array|String)
 
-  Take a selector String or an Array/array-like (e.g. `NodeList`), and return a new ElementCollection with [enumerable]() methods.
+  Takes a selector or an Arrayish (e.g. `NodeList`), and returns a new ElementCollection with [enumerable](https://github.com/component/enumerable) methods.
 
 * .each()
 * .map()

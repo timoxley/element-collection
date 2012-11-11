@@ -1,7 +1,7 @@
 {
-  "name": "element-list",
-  "repo": "timoxley/element-list",
-  "description": "Hide or show elements",
+  "name": "element-collection",
+  "repo": "timoxley/element-collection",
+  "description": "Enumerable DOM Element Collection",
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {
