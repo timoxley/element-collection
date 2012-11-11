@@ -1,16 +1,42 @@
+/**
+ * Module Dependencies
+ */
+
 var toArray = require('to-array')
 var Enumerable = require('enumerable')
+
+/**
+ * Create an ElementList
+ *
+ * @param els {String|Arrayish} Element list or selector String
+ * @api public
+ */
 
 module.exports = function(els) {
   return new ElementList(els)
 }
 
+/**
+ * ElementList Constructor
+ *
+ * @param els {String|Arrayish} Element list or selector String
+ * @api private
+ */
+
 function ElementList(els) {
+  // handle Strings
   if (typeof els === 'string') els = document.querySelectorAll(els)
+  // handle Arrayish
   this.els = toArray(els)
 }
 
 Enumerable(ElementList.prototype)
+
+/**
+ * Iterator for internal element array.
+ *
+ * @api private
+ */
 
 ElementList.prototype.__iterate__ = function(){
   var self = this

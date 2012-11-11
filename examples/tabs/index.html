@@ -52,12 +52,16 @@
     </div>
     <script src="../../build/build.js"></script>
     <script>
-      var List = require('element-list')
+      var Collection = require('element-collection')
       var matchesSelector = require('component-matches-selector')
 
       var Tabs = function(tabs) {
-        this.list = new List(tabs)
-        this.select(this.list.first())
+        this.tabs = new Collection(tabs)
+        this.tabs
+        .select(this.tabs.first())
+        .select(function(el) {
+          return el.hash === document.location.hash)
+        })
       }
 
       Tabs.prototype.select = function(id) {
@@ -66,8 +70,10 @@
           return this.elementMatches(el, id)
         }.bind(this))
 
+        if (!this.selected) return this
+
         // hide all elements
-        if (this.selected) this.list.each(function(el) {
+        this.list.each(function(el) {
           el.style.display = 'none'
         })
 
@@ -83,12 +89,13 @@
       }
 
       var tabs = new Tabs(document.querySelectorAll('.page')) // could have passed a string as well
-      var nav = List('.nav a') // < for example.
+      var nav = Collection('.nav a') // < for example.
 
-      // attach click listeners to nav's links
+      // Attach click listeners to nav's links
       nav.each(function(link) {
         link.addEventListener('click', function(e) {
           tabs.select(e.target.hash + '-page')
+          return true
         })
       })
 
