@@ -33,7 +33,6 @@ hidden.each(hide)
 function hide(el) {
   el.style.display = 'none'
 }
-
 ```
 
 ## API
