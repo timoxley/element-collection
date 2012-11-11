@@ -5,15 +5,11 @@
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-responsive.no-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../build/build.css" />
     <style>
-      body {
-        background: lightgrey;
-      }
       .nav {
         background: white;
       }
       .page {
         background: white;
-        outline: 1px solid red;
         padding-top: 80px;
         height: 90%;
       }
@@ -57,23 +53,23 @@
 
       var Tabs = function(tabs) {
         this.tabs = new Collection(tabs)
-        this.tabs
+        this
         .select(this.tabs.first())
         .select(function(el) {
-          return el.hash === document.location.hash)
+          return el.hash === document.location.hash
         })
       }
 
       Tabs.prototype.select = function(id) {
         // find item that matches id
-        this.selected = this.list.find(function(el) {
+        this.selected = this.tabs.find(function(el) {
           return this.elementMatches(el, id)
         }.bind(this))
 
         if (!this.selected) return this
 
         // hide all elements
-        this.list.each(function(el) {
+        this.tabs.each(function(el) {
           el.style.display = 'none'
         })
 
