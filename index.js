@@ -20,12 +20,13 @@ module.exports = function(els) {
  * ElementList Constructor
  *
  * @param els {String|Arrayish} Element list or selector String
+ * @param context {Element} if a selector is passed use optional context
  * @api private
  */
 
-function ElementList(els) {
+function ElementList(els, context) {
   // handle Strings
-  if (typeof els === 'string') els = document.querySelectorAll(els)
+  if (typeof els === 'string') els = (context || document).querySelectorAll(els)
   // handle Arrayish
   this.els = toArray(els)
 }
