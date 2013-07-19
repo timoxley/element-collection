@@ -2,7 +2,7 @@
   "name": "element-collection",
   "repo": "timoxley/element-collection",
   "description": "Enumerable DOM Element Collection",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [],
   "dependencies": {
     "timoxley/to-array": "*",
