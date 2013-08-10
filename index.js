@@ -12,8 +12,8 @@ var Enumerable = require('enumerable')
  * @api public
  */
 
-module.exports = function(els) {
-  return new ElementList(els)
+module.exports = function(els, context) {
+  return new ElementList(els, context)
 }
 
 /**
